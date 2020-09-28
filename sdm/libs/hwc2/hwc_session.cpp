@@ -48,7 +48,7 @@
 
 #define __CLASS__ "HWCSession"
 
-#ifdef TARGET_KERNEL_4_14
+#ifdef TARGET_MIN_KERNEL_4_14
 #define HWC_UEVENT_SWITCH_HDMI "change@/devices/virtual/graphics/fb2"
 #define CONN_STATE "STATUS="
 #else
@@ -1582,8 +1582,8 @@ int HWCSession::HotPlugHandler(bool connected) {
         // This cannot be avoided due to SurfaceFlinger design
         // limitation in Android P.
         HWCDisplayExternal::Destroy(hwc_display_[HWC_DISPLAY_PRIMARY]);
-        DLOGE("External display is connected. Exit!!");
-        _exit(1);
+        DLOGE("External display is connected. Abort!!");
+        abort();
       }
       break;
     }
